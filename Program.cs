@@ -13,8 +13,7 @@ namespace Game
             //пока для проверки
             foreach (var str in args)
                 Console.Write(str + ' ');
-            int d = (int)'?';
-            //потом переместить функцию в основной класс
+
             if (Check.IsFormatCorrect(args))
             {
                 var newGame = new Game(args);

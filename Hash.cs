@@ -13,8 +13,6 @@ namespace Game
         public readonly string HexHash;
         readonly byte[] secretKey = new byte[64];
 
-        //msg - это ответ компа
-        //key - случайно сгенерированный ключ
         public Hash(string msg)
         {
             rng.GetBytes(secretKey);
