@@ -16,5 +16,14 @@ namespace Game
             Console.WriteLine(err);
 
         }
+
+        public static void WriteMessage(string title, string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(title);
+            Console.ResetColor();
+            Console.WriteLine(msg);
+
+        }
     }
 }
