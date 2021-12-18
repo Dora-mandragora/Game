@@ -10,12 +10,14 @@ namespace Game
     {
         string[] Elements;
         GameRules Rules;
+        HelpTable HelpTable;
         Result Result = new Result();
         Random rnd = new Random();
         public Game(string[] args)
         {
             Elements = args;
             Rules = new GameRules(args);
+            HelpTable = new HelpTable(args);
         }
 
         public void Start()
@@ -25,15 +27,15 @@ namespace Game
             {
                 var MMove = rnd.Next(0, Elements.Length);
                 var hash = new Hash(MMove.ToString());
-                Message.WriteMessage("HMAC: ", hash.GetHMAC(MMove.ToString()));
+                Message.WriteMessage("HMAC: ", hash.GetHMAC());
                 ShowMenu();
                 var input = Console.ReadLine().ToString();
                 if (Check.IsStringCorrect(input))
-                {                    
-                    var UMove = char.Parse(input);
-                    if (Check.IsMoveCorrect(UMove, Elements))
-                        if (!ExecuteCommand(MMove, UMove)) ContinueFlag = false; else;
-                    else continue;
+                {
+                    if (char.TryParse(input, out char UMove))
+                        if (Check.IsMoveCorrect(UMove, Elements))
+                            if (!ExecuteCommand(MMove, UMove, hash)) { ContinueFlag = false; Result.ShowResults(); }
+                            else continue;
                 }
             }
         }                 
@@ -49,14 +51,15 @@ namespace Game
             Console.Write("Enter your move: ");
         }
 
-        public bool ExecuteCommand(int MMove, int UMove)
+        bool ExecuteCommand(int MMove, int UMove, Hash hash)
         {
             if (UMove == '0') return false;
-            if (UMove == Check.QUESTION_MARK) Result.ShowResults();
+            if (UMove == Check.QUESTION_MARK) HelpTable.ShowTable(); //Result.ShowResults();
             else
             {
+                UMove -= 48;
                 Console.WriteLine("Computer move: " + Elements[MMove]);
-                Rules.FindWinner(MMove, UMove, Result);
+                Rules.FindWinner(MMove, UMove, hash, Result);
             }
             return true;
         }

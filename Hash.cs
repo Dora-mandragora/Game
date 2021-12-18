@@ -10,26 +10,28 @@ namespace Game
     internal class Hash
     {
         RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+        readonly byte[] secretKey = new byte[32];
+        
+        readonly string Message;
         public readonly string HexHash;
-        readonly byte[] secretKey = new byte[64];
 
         public Hash(string msg)
         {
             rng.GetBytes(secretKey);
-            HexHash = GetHMAC(msg);
+            Message = msg;
+            HexHash = GetHMAC();
             //Console.WriteLine(HexHash);
         }
 
-        public string GetHMAC(string message)
+        public string GetHMAC()
         {
-            byte[] bmessage = Encoding.UTF8.GetBytes(message);         
+            byte[] bMessage = Encoding.UTF8.GetBytes(Message);         
             HMACSHA256 hmac = new HMACSHA256(secretKey);
-            hmac.ComputeHash(bmessage);
-            hmac.Initialize();
-            return string.Concat(Array.ConvertAll(hmac.Hash, b => b.ToString("x"))).ToLower();
+            hmac.ComputeHash(bMessage);            
+            return string.Concat(Array.ConvertAll(hmac.Hash, b => b.ToString("x")));
         }
 
-        public string GetKey() => string.Concat(Array.ConvertAll(secretKey, b => b.ToString("x"))).ToLower();
+        public string GetKey() => string.Concat(Array.ConvertAll(secretKey, b => b.ToString("x")));
         
 
     }

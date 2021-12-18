@@ -21,7 +21,7 @@ namespace Game
             Console.WriteLine("|{0,6}|{1,6}|", "Move", "Res");
             Console.WriteLine(new string('-', 15));
             foreach (var res in TableResult)
-                Console.WriteLine(string.Format("|{0,6}|{1,6}", number++, res));
+                Console.WriteLine(string.Format("|{0,6}|{1,6}|", number++, res));
             Console.WriteLine(new string('-', 15));
         }
     }

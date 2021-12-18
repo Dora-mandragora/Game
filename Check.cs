@@ -35,6 +35,7 @@ namespace Game
 
         public static bool IsStringCorrect(string str)
         {
+            if (str == string.Empty) return false;
             if (str[0] == '?') return true;
             else if (int.TryParse(str, out _)) return true;
             else return false;
