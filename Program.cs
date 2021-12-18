@@ -9,17 +9,13 @@ namespace Game
     internal class Program
     {
         static void Main(string[] args)
-        {           
-            //пока для проверки
-            foreach (var str in args)
-                Console.Write(str + ' ');
-
+        {                  
             if (Check.IsFormatCorrect(args))
             {
                 var newGame = new Game(args);
                 newGame.Start();
             }        
-            else return;           
+            else return;        
 
         }        
         

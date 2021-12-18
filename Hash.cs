@@ -20,7 +20,6 @@ namespace Game
             rng.GetBytes(secretKey);
             Message = msg;
             HexHash = GetHMAC();
-            //Console.WriteLine(HexHash);
         }
 
         public string GetHMAC()

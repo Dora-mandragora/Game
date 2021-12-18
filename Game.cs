@@ -54,7 +54,7 @@ namespace Game
         bool ExecuteCommand(int MMove, int UMove, Hash hash)
         {
             if (UMove == '0') return false;
-            if (UMove == Check.QUESTION_MARK) HelpTable.ShowTable(); //Result.ShowResults();
+            if (UMove == Check.QUESTION_MARK) HelpTable.ShowTable();
             else
             {
                 UMove -= 48;

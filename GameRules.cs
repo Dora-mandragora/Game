@@ -8,7 +8,6 @@ namespace Game
 {
     internal class GameRules
     {
-        //rock paper scissors lizard Spock
         string[] Elements;
         public enum Option
         {
