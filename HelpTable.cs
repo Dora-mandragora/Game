@@ -28,7 +28,7 @@ namespace Game
         {
             var size = 8 * (Elements.Length+2);
             Console.WriteLine(new string('-', size));
-            Console.Write("|{0,8}",' ');
+            Console.Write("|{0,8}","2\\1");
             foreach (var el in Elements)
                 Console.Write("|{0,8}", el);
             Console.WriteLine("|");

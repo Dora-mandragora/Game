@@ -13,13 +13,11 @@ namespace Game
         readonly byte[] secretKey = new byte[32];
         
         readonly string Message;
-        public readonly string HexHash;
 
         public Hash(string msg)
         {
             rng.GetBytes(secretKey);
             Message = msg;
-            HexHash = GetHMAC();
         }
 
         public string GetHMAC()
